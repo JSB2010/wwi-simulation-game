@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World War I: Paths to Victory & Peace (1914-1918)</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f0e6d2;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .game-container {
+            background-color: #fff;
+            border: 2px solid #8b7d6b;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .game-header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #8b7d6b;
+            padding-bottom: 10px;
+        }
+        
+        h1 {
+            color: #7c0000;
+            font-size: 32px;
+        }
+        
+        .subtitle {
+            font-style: italic;
+            margin-top: -15px;
+            font-size: 18px;
+        }
+        
+        .game-content {
+            padding: 15px;
+            line-height: 1.5;
+        }
+        
+        .scenario {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .country-button {
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .triple-entente {
+            background-color: #3056a0;
+        }
+        
+        .triple-alliance {
+            background-color: #b92e34;
+        }
+        
+        .neutral {
+            background-color: #7a7a7a;
+        }
+        
+        .option-button {
+            background-color: #d6c8a9;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: left;
+        }
+        
+        .option-button:hover, .country-button:hover {
+            opacity: 0.8;
+        }
+        
+        #restart-button {
+            background-color: #7c0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            margin: 20px auto;
+            font-size: 16px;
+            cursor: pointer;
+            display: none;
+        }
+        
+        .start-screen {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .map-image {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #8b7d6b;
+            margin: 15px 0;
+            background-color: #e6e0d4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 400px;
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>World War I: Paths to Victory & Peace</h1>
+            <p class="subtitle">1914-1918: Balance National Objectives with the Quest for Peace</p>
+        </div>
+        
+        <div id="start-screen" class="start-screen">
+            <h2>Choose Your Nation</h2>
+            <p>Lead your country through the Great War. You face a dual challenge: achieve your nation's strategic goals while finding a path to peace.</p>
+            
+            <div class="map-image">
+                [Map of European Alliances in 1914 would appear here]
+            </div>
+            
+            <div class="options-container">
+                <h3>Major Powers</h3>
+                <button class="country-button triple-entente" onclick="alert('Britain selected!')">Great Britain (Triple Entente)</button>
+                <button class="country-button triple-entente" onclick="alert('France selected!')">France (Triple Entente)</button>
+                <button class="country-button triple-entente" onclick="alert('Russia selected!')">Russia (Triple Entente)</button>
+                <button class="country-button triple-alliance" onclick="alert('Germany selected!')">German Empire (Triple Alliance)</button>
+            </div>
+        </div>
+        
+        <div id="game-content" class="game-content" style="display: none">
+            <!-- Game content will be inserted here -->
+        </div>
+        
+        <button id="restart-button" onclick="alert('Restart clicked!')" style="display: none;">Play Again</button>
+    </div>
+    
+    <script>
+        console.log("Script loaded!");
+    </script>
+</body>
+</html>

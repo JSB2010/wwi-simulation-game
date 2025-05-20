@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World War I: Paths to Victory & Peace (1914-1918)</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f0e6d2;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .game-container {
+            background-color: #fff;
+            border: 2px solid #8b7d6b;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #8b7d6b;
+            padding-bottom: 10px;
+        }
+
+        h1 {
+            color: #7c0000;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            font-style: italic;
+            margin-top: -15px;
+            font-size: 18px;
+        }
+
+        .game-content {
+            padding: 15px;
+            line-height: 1.5;
+        }
+
+        .scenario {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .country-button {
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .triple-entente {
+            background-color: #3056a0;
+        }
+
+        .triple-alliance {
+            background-color: #b92e34;
+        }
+
+        .neutral {
+            background-color: #7a7a7a;
+        }
+
+        .option-button {
+            background-color: #d6c8a9;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .option-button:hover, .country-button:hover {
+            opacity: 0.8;
+        }
+
+        #restart-button {
+            background-color: #7c0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            margin: 20px auto;
+            font-size: 16px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .start-screen {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .map-image {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #8b7d6b;
+            margin: 15px 0;
+            background-color: #e6e0d4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 400px;
+            font-style: italic;
+            color: #666;
+        }
+
+        .player-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e6e0d4;
+            border-radius: 5px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .historical-note {
+            background-color: #f8f0e3;
+            border-left: 4px solid #7c0000;
+            padding: 12px;
+            margin-top: 20px;
+            font-style: italic;
+            font-size: 14px;
+        }
+
+        .resources-panel {
+            background-color: #e6e0d4;
+            border: 1px solid #8b7d6b;
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .resource-item {
+            text-align: center;
+            padding: 5px;
+            width: 18%;
+            min-width: 80px;
+        }
+
+        .minor-power-button {
+            background-color: #5e8b3d;
+        }
+
+        .year-display {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #7c0000;
+        }
+
+        .war-progress {
+            width: 100%;
+            height: 10px;
+            background-color: #e6e0d4;
+            margin: 15px 0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #7c0000;
+            transition: width 0.5s;
+        }
+
+        .national-objectives {
+            background-color: #e8f0e6;
+            border: 1px solid #7c0000;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+
+        .objectives-title {
+            color: #7c0000;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .objective {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+
+        .objective-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        .objective-complete {
+            background-color: #5e8b3d;
+            color: white;
+        }
+
+        .objective-incomplete {
+            background-color: #b92e34;
+            color: white;
+        }
+
+        .objective-progress {
+            background-color: #f5be41;
+            color: black;
+        }
+
+        .peace-gauge {
+            width: 100%;
+            height: 15px;
+            background-color: #b92e34;
+            margin: 15px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .peace-progress {
+            height: 100%;
+            background-color: #5e8b3d;
+            transition: width 0.5s;
+        }
+
+        .peace-label {
+            position: absolute;
+            top: -20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .outcome-victory, .outcome-defeat {
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .outcome-victory {
+            background-color: #e8f0e6;
+            border: 2px solid #5e8b3d;
+            color: #5e8b3d;
+        }
+
+        .outcome-defeat {
+            background-color: #f9e0e0;
+            border: 2px solid #b92e34;
+            color: #b92e34;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>World War I: Paths to Victory & Peace</h1>
+            <p class="subtitle">1914-1918: Balance National Objectives with the Quest for Peace</p>
+        </div>
+
+        <div id="start-screen" class="start-screen">
+            <h2>Choose Your Nation</h2>
+            <p>Lead your country through the Great War. You face a dual challenge: achieve your nation's strategic goals while finding a path to peace. Each decision affects military strength, diplomatic standing, and domestic stability. Will you push for total victory at any cost, or seek an honorable peace to end the bloodshed?</p>
+
+            <div class="map-image">
+                [Map of European Alliances in 1914 would appear here]
+            </div>
+
+            <div class="options-container">
+                <h3>Major Powers</h3>
+                <button class="country-button triple-entente" id="britain-btn">Great Britain (Triple Entente)</button>
+                <button class="country-button triple-entente" id="france-btn">France (Triple Entente)</button>
+                <button class="country-button triple-entente" id="russia-btn">Russia (Triple Entente)</button>
+                <button class="country-button triple-alliance" id="germany-btn">German Empire (Triple Alliance)</button>
+                <button class="country-button triple-alliance" id="austria-btn">Austria-Hungary (Triple Alliance)</button>
+                <button class="country-button triple-alliance" id="italy-btn">Italy (Triple Alliance)</button>
+                <button class="country-button neutral" id="usa-btn">United States (Neutral)</button>
+
+                <h3>Minor Powers</h3>
+                <button class="country-button minor-power-button" id="ottoman-btn">Ottoman Empire</button>
+                <button class="country-button minor-power-button" id="serbia-btn">Serbia</button>
+                <button class="country-button minor-power-button" id="belgium-btn">Belgium</button>
+                <button class="country-button minor-power-button" id="japan-btn">Japan</button>
+            </div>
+        </div>
+
+        <div id="game-content" class="game-content" style="display: none">
+            <!-- Game content will be inserted here -->
+        </div>
+
+        <button id="restart-button" style="display: none;">Play Again</button>
+    </div>
+
+    <script>
+        // Game state variables
+        let gameState = {
+            playerCountry: '',
+            allianceSystem: '',
+            currentScenario: '',
+            currentYear: 1914,
+            warProgress: 0,
+            peaceProgress: 20, // Starts at 20% - needs to reach 100% to achieve peace
+            militaryStrength: 50,
+            diplomacy: 50,
+            stability: 50,
+            resources: {
+                manpower: 100,
+                industry: 100,
+                food: 100,
+                munitions: 100,
+                morale: 100
+            },
+            // National objectives with completion status
+            objectives: {
+                germany: [
+                    { text: "Maintain control of Alsace-Lorraine", complete: false },
+                    { text: "Secure colonial gains in Africa", complete: false },
+                    { text: "Establish economic dominance in Central Europe", complete: false },
+                    { text: "Weaken Russia's influence in Eastern Europe", complete: false },
+                    { text: "Ensure Austria-Hungary's survival as a great power", complete: false }
+                ],
+                france: [
+                    { text: "Recover Alsace-Lorraine from Germany", complete: false },
+                    { text: "Secure reparations for war damages", complete: false },
+                    { text: "Establish a buffer zone on eastern border", complete: false },
+                    { text: "Weaken Germany to prevent future threats", complete: false },
+                    { text: "Maintain colonial empire", complete: false }
+                ],
+                britain: [
+                    { text: "Preserve naval supremacy", complete: false },
+                    { text: "Protect Belgian sovereignty", complete: false },
+                    { text: "Maintain the colonial empire", complete: false },
+                    { text: "Prevent German hegemony in Europe", complete: false },
+                    { text: "Secure Middle Eastern oil interests", complete: false }
+                ],
+                russia: [
+                    { text: "Protect Serbia and other Slavic nations", complete: false },
+                    { text: "Gain control of the Dardanelles/Constantinople", complete: false },
+                    { text: "Secure territorial gains in Eastern Europe", complete: false },
+                    { text: "Maintain status as a great power", complete: false },
+                    { text: "Prevent domestic revolution", complete: false }
+                ],
+                usa: [
+                    { text: "Ensure freedom of the seas", complete: false },
+                    { text: "Establish a post-war order based on self-determination", complete: false },
+                    { text: "Prevent any single power from dominating Europe", complete: false },
+                    { text: "Expand American economic influence", complete: false },
+                    { text: "Shape the peace settlement", complete: false }
+                ],
+                ottoman: [
+                    { text: "Maintain territorial integrity of the empire", complete: false },
+                    { text: "Reduce foreign interference in Ottoman affairs", complete: false },
+                    { text: "Recover territories lost in recent conflicts", complete: false },
+                    { text: "Survive as a great power", complete: false },
+                    { text: "Modernize military and economy", complete: false }
+                ],
+                austria: [
+                    { text: "Punish Serbia for supporting terrorism", complete: false },
+                    { text: "Maintain the multi-ethnic empire", complete: false },
+                    { text: "Strengthen position in the Balkans", complete: false },
+                    { text: "Preserve alliance with Germany", complete: false },
+                    { text: "Survive as a great power", complete: false }
+                ],
+                serbia: [
+                    { text: "Preserve national sovereignty", complete: false },
+                    { text: "Avoid occupation by Austria-Hungary", complete: false },
+                    { text: "Unify South Slavic peoples", complete: false },
+                    { text: "Gain access to the Adriatic Sea", complete: false },
+                    { text: "Secure territorial gains from Austria-Hungary", complete: false }
+                ],
+                italy: [
+                    { text: "Acquire Trentino and South Tyrol from Austria", complete: false },
+                    { text: "Secure Dalmatian coast territories", complete: false },
+                    { text: "Establish influence in Albania", complete: false },
+                    { text: "Gain colonial territories", complete: false },
+                    { text: "Emerge as a respected great power", complete: false }
+                ],
+                belgium: [
+                    { text: "Preserve national sovereignty", complete: false },
+                    { text: "Expel occupying forces", complete: false },
+                    { text: "Maintain colonial holdings in the Congo", complete: false },
+                    { text: "Secure reparations for war damages", complete: false },
+                    { text: "Obtain security guarantees for the future", complete: false }
+                ],
+                japan: [
+                    { text: "Expand influence in East Asia", complete: false },
+                    { text: "Seize German colonial possessions", complete: false },
+                    { text: "Increase international recognition as a great power", complete: false },
+                    { text: "Secure economic concessions in China", complete: false },
+                    { text: "Gain equal standing with Western powers", complete: false }
+                ]
+            }
+        };
+
+        // Game scenarios - just a few examples for testing
+        const scenarios = {
+            // GERMANY SCENARIOS - 1914
+            germany_start: {
+                year: 1914,
+                title: "The German Empire - July 1914",
+                text: "You lead the German Empire, the strongest military power in Europe. Your ally Austria-Hungary seeks your support after the assassination of Archduke Franz Ferdinand by Serbian nationalists. Your generals worry about Russia's growing power, while your factories and railways give you an edge in mobilization speed. Your dual challenge: achieve Germany's strategic objectives while finding a path to peace.",
+                options: [
+                    { text: "Offer unconditional support to Austria-Hungary (the 'blank check')", id: "germany_blank_check", peaceMod: -15 },
+                    { text: "Urge restraint to Austria-Hungary", id: "germany_restraint", peaceMod: +10 },
+                    { text: "Begin quiet military preparations", id: "germany_preparations", peaceMod: -5 }
+                ],
+                objectiveEffects: {},
+                historicalNote: "Germany's 'blank check' to Austria-Hungary on July 5-6, 1914, was a critical step toward war, emboldening Austria to take a hard line against Serbia despite the risk of Russian intervention."
+            },
+
+            germany_blank_check: {
+                year: 1914,
+                title: "The Blank Check",
+                text: "You assure Austria-Hungary of Germany's full support in whatever action they decide to take against Serbia. This emboldens Austria-Hungary to issue a harsh ultimatum to Serbia on July 23. Russia begins partial mobilization to defend Serbia, while France reaffirms its alliance with Russia. War seems increasingly likely, and your fifth objective (ensuring Austria-Hungary's survival) is progressing well as you strengthen your alliance.",
+                options: [
+                    { text: "Stand firm with Austria-Hungary despite Russian mobilization", id: "germany_stand_firm", peaceMod: -15 },
+                    { text: "Implement the Schlieffen Plan for war", id: "germany_schlieffen", peaceMod: -20 },
+                    { text: "Open diplomatic channel with Russia to defuse crisis", id: "germany_russia_diplomacy", peaceMod: +10 }
+                ],
+                effects: { militaryStrength: 0, diplomacy: -15, stability: 5, resources: { manpower: 0, industry: 0, food: 0, munitions: 0, morale: 5 } },
+                objectiveEffects: {
+                    'Ensure Austria-Hungary\'s survival as a great power': 'progress'
+                },
+                historicalNote: "The German blank check was intended to prevent a repeat of the 1913 Balkan crisis where Austria-Hungary backed down. Kaiser Wilhelm II later tried to moderate the crisis when he realized the risk of wider war, but by then events had gained their own momentum."
+            },
+
+            // FRANCE SCENARIOS - 1914
+            france_start: {
+                year: 1914,
+                title: "The French Republic - July 1914",
+                text: "You lead France, still seeking to recover Alsace-Lorraine lost to Germany in 1871. Your alliance with Russia is crucial against German power. When news arrives of the assassination of Archduke Franz Ferdinand, your President Raymond Poincaré and Prime Minister René Viviani are actually visiting St. Petersburg, demonstrating the strength of the Franco-Russian alliance. Your dual challenge: recover France's lost territories while finding a path to peace.",
+                options: [
+                    { text: "Reaffirm support for Russia", id: "france_support_russia", peaceMod: -10 },
+                    { text: "Focus on securing British support", id: "france_british_support", peaceMod: 0 },
+                    { text: "Strengthen defenses along the German border", id: "france_strengthen_defenses", peaceMod: -5 }
+                ],
+                objectiveEffects: {},
+                historicalNote: "France's desire to recover Alsace-Lorraine was a key motivator in French policy. President Poincaré and Prime Minister Viviani were indeed visiting Russia (July 20-23) when the Austrian ultimatum to Serbia was delivered, symbolizing the strength of the Franco-Russian alliance."
+            }
+        };
+
+        // Add event listeners to country buttons
+        document.getElementById('britain-btn').addEventListener('click', function() { startGame('britain'); });
+        document.getElementById('france-btn').addEventListener('click', function() { startGame('france'); });
+        document.getElementById('russia-btn').addEventListener('click', function() { startGame('russia'); });
+        document.getElementById('germany-btn').addEventListener('click', function() { startGame('germany'); });
+        document.getElementById('austria-btn').addEventListener('click', function() { startGame('austria'); });
+        document.getElementById('italy-btn').addEventListener('click', function() { startGame('italy'); });
+        document.getElementById('usa-btn').addEventListener('click', function() { startGame('usa'); });
+        document.getElementById('ottoman-btn').addEventListener('click', function() { startGame('ottoman'); });
+        document.getElementById('serbia-btn').addEventListener('click', function() { startGame('serbia'); });
+        document.getElementById('belgium-btn').addEventListener('click', function() { startGame('belgium'); });
+        document.getElementById('japan-btn').addEventListener('click', function() { startGame('japan'); });
+
+        // Add event listener to restart button
+        document.getElementById('restart-button').addEventListener('click', restartGame);
+
+        // Function to handle game options within scenarios
+        function handleOptionClick(scenarioId) {
+            loadScenario(scenarioId);
+        }
+
+        // Function to start the game with the selected country
+        function startGame(country) {
+            gameState.playerCountry = country;
+
+            // Set alliance system based on country
+            if (['britain', 'france', 'russia'].includes(country)) {
+                gameState.allianceSystem = 'triple-entente';
+            } else if (['germany', 'austria', 'italy'].includes(country)) {
+                gameState.allianceSystem = 'triple-alliance';
+            } else if (country === 'usa' || country === 'belgium' || country === 'serbia') {
+                gameState.allianceSystem = 'neutral';
+            } else if (country === 'japan') {
+                gameState.allianceSystem = 'entente-leaning';
+            } else if (country === 'ottoman') {
+                gameState.allianceSystem = 'german-leaning';
+            }
+
+            // Set initial scenario
+            gameState.currentScenario = `${country}_start`;
+
+            // Reset game stats
+            gameState.militaryStrength = 50;
+            gameState.diplomacy = 50;
+            gameState.stability = 50;
+            gameState.warProgress = 0;
+            gameState.peaceProgress = 20;
+            gameState.resources = {
+                manpower: 100,
+                industry: 100,
+                food: 100,
+                munitions: 100,
+                morale: 100
+            };
+
+            // Reset objectives
+            if (gameState.objectives[country]) {
+                gameState.objectives[country].forEach(obj => {
+                    obj.complete = false;
+                });
+            }
+
+            // Hide start screen and show game content
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('game-content').style.display = 'block';
+
+            // Load the initial scenario
+            loadScenario(gameState.currentScenario);
+        }
+
+        // Function to load a scenario
+        function loadScenario(scenarioId) {
+            const scenario = scenarios[scenarioId];
+
+            if (!scenario) {
+                console.error("Scenario not found:", scenarioId);
+                document.getElementById('game-content').innerHTML = `<h2>This branch of history is still being developed</h2><p>The "${scenarioId}" has not been developed yet.</p>`;
+                document.getElementById('restart-button').style.display = 'block';
+                return;
+            }
+
+            // If this is coming from an option in the previous scenario, apply peace modification
+            if (gameState.currentScenario && gameState.currentScenario !== scenarioId) {
+                // Find the option in the current scenario that leads to this new scenario
+                const currentScenario = scenarios[gameState.currentScenario];
+                if (currentScenario && currentScenario.options) {
+                    const selectedOption = currentScenario.options.find(option => option.id === scenarioId);
+                    if (selectedOption && selectedOption.peaceMod !== undefined) {
+                        // Apply peace modification
+                        gameState.peaceProgress += selectedOption.peaceMod;
+                        gameState.peaceProgress = Math.max(0, Math.min(100, gameState.peaceProgress));
+                        console.log(`Peace progress updated: ${selectedOption.peaceMod > 0 ? '+' : ''}${selectedOption.peaceMod} (now ${gameState.peaceProgress}%)`);
+                    }
+                }
+            }
+
+            // Now update current scenario
+            gameState.currentScenario = scenarioId;
+
+            // Update game year if scenario specifies it
+            if (scenario.year) {
+                gameState.currentYear = scenario.year;
+            }
+
+            // Update war progress if scenario specifies it
+            if (scenario.warProgress !== undefined) {
+                gameState.warProgress = scenario.warProgress;
+            }
+
+            // Update game stats if this scenario has effects
+            if (scenario.effects) {
+                gameState.militaryStrength += scenario.effects.militaryStrength || 0;
+                gameState.diplomacy += scenario.effects.diplomacy || 0;
+                gameState.stability += scenario.effects.stability || 0;
+
+                // Update resources if specified
+                if (scenario.effects.resources) {
+                    for (const [resource, value] of Object.entries(scenario.effects.resources)) {
+                        gameState.resources[resource] += value;
+                        gameState.resources[resource] = Math.max(0, Math.min(100, gameState.resources[resource]));
+                    }
+                }
+
+                // Ensure values stay within 0-100 range
+                gameState.militaryStrength = Math.max(0, Math.min(100, gameState.militaryStrength));
+                gameState.diplomacy = Math.max(0, Math.min(100, gameState.diplomacy));
+                gameState.stability = Math.max(0, Math.min(100, gameState.stability));
+            }
+
+            // Update objective completion status
+            if (scenario.objectiveEffects) {
+                for (const [objective, effect] of Object.entries(scenario.objectiveEffects)) {
+                    const objectiveIndex = gameState.objectives[gameState.playerCountry].findIndex(obj => obj.text === objective);
+                    if (objectiveIndex !== -1) {
+                        if (effect === 'complete') {
+                            gameState.objectives[gameState.playerCountry][objectiveIndex].complete = true;
+                        } else if (effect === 'negative') {
+                            gameState.objectives[gameState.playerCountry][objectiveIndex].complete = false;
+                        }
+                    }
+                }
+            }
+
+            // Show restart button for end scenarios
+            if (scenario.endGame) {
+                document.getElementById('restart-button').style.display = 'block';
+            } else {
+                document.getElementById('restart-button').style.display = 'none';
+            }
+
+            // Create HTML for the scenario
+            let html = `
+                <div class="year-display">${gameState.currentYear}</div>
+                <h2>${scenario.title}</h2>
+                <div class="scenario">${scenario.text}</div>
+
+                <div class="player-stats">
+                    <div class="stat-item">
+                        <strong>Military Strength</strong><br>
+                        ${gameState.militaryStrength}%
+                    </div>
+                    <div class="stat-item">
+                        <strong>Diplomatic Standing</strong><br>
+                        ${gameState.diplomacy}%
+                    </div>
+                    <div class="stat-item">
+                        <strong>Internal Stability</strong><br>
+                        ${gameState.stability}%
+                    </div>
+                </div>
+
+                <div class="resources-panel">
+                    <div class="resource-item">
+                        <strong>Manpower</strong><br>
+                        ${gameState.resources.manpower}%
+                    </div>
+                    <div class="resource-item">
+                        <strong>Industry</strong><br>
+                        ${gameState.resources.industry}%
+                    </div>
+                    <div class="resource-item">
+                        <strong>Food</strong><br>
+                        ${gameState.resources.food}%
+                    </div>
+                    <div class="resource-item">
+                        <strong>Munitions</strong><br>
+                        ${gameState.resources.munitions}%
+                    </div>
+                    <div class="resource-item">
+                        <strong>Morale</strong><br>
+                        ${gameState.resources.morale}%
+                    </div>
+                </div>
+
+                <div class="national-objectives">
+                    <h3 class="objectives-title">National Objectives</h3>
+                    ${gameState.objectives[gameState.playerCountry].map(obj => {
+                        let iconClass = 'objective-incomplete';
+                        let icon = '✗';
+
+                        if (obj.complete) {
+                            iconClass = 'objective-complete';
+                            icon = '✓';
+                        } else if (scenario.objectiveEffects && scenario.objectiveEffects[obj.text] === 'progress') {
+                            iconClass = 'objective-progress';
+                            icon = '⟳';
+                        }
+
+                        return `
+                            <div class="objective">
+                                <div class="objective-icon ${iconClass}">${icon}</div>
+                                ${obj.text}
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+
+                <!-- War Progress Indicator -->
+                ${gameState.warProgress > 0 ? `
+                <div>
+                    <h3>War Progress</h3>
+                    <div class="war-progress">
+                        <div class="progress-bar" style="width: ${gameState.warProgress}%;"></div>
+                    </div>
+                </div>` : ''}
+
+                <!-- Peace Gauge -->
+                <div>
+                    <div class="peace-gauge">
+                        <div class="peace-progress" style="width: ${gameState.peaceProgress}%;"></div>
+                        <div class="peace-label">Path to Peace: ${gameState.peaceProgress}%</div>
+                    </div>
+                </div>
+
+                <!-- Options -->
+                ${scenario.options ? `
+                <div class="options-container">
+                    <h3>Your Decision</h3>
+                    ${scenario.options.map(option => {
+                        const peaceMod = option.peaceMod ? (option.peaceMod > 0 ? `+${option.peaceMod}` : option.peaceMod) : '0';
+                        const peaceColor = option.peaceMod > 0 ? 'green' : (option.peaceMod < 0 ? 'red' : 'black');
+                        return `
+                            <button class="option-button" onclick="handleOptionClick('${option.id}')">
+                                ${option.text} <span style="float: right; font-size: 0.8em; color: ${peaceColor};">[Peace: ${peaceMod}]</span>
+                            </button>
+                        `;
+                    }).join('')}
+                </div>` : ''}
+
+                <!-- Historical Note -->
+                ${scenario.historicalNote ? `
+                <div class="historical-note">
+                    <strong>Historical Note:</strong> ${scenario.historicalNote}
+                </div>` : ''}
+
+                <!-- Victory/Defeat Display for End Game -->
+                ${scenario.endGame ? `
+                <div class="${scenario.victory ? 'outcome-victory' : 'outcome-defeat'}">
+                    ${scenario.victory ? 'VICTORY' : 'DEFEAT'}
+                </div>
+                <div style="text-align: center; margin-top: 10px;">
+                    Objectives Completed: ${scenario.objectivesCompleted} / 5
+                </div>` : ''}
+            `;
+
+            // Update the game content div
+            document.getElementById('game-content').innerHTML = html;
+        }
+
+        // Function to restart the game
+        function restartGame() {
+            document.getElementById('start-screen').style.display = 'block';
+            document.getElementById('game-content').style.display = 'none';
+            document.getElementById('restart-button').style.display = 'none';
+        }
+
+        // Make these functions globally accessible
+        window.startGame = startGame;
+        window.handleOptionClick = handleOptionClick;
+        window.restartGame = restartGame;
+    </script>
+</body>
+</html>
