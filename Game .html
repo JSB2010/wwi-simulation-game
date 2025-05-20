@@ -3276,6 +3276,297 @@
                 objectivesFailed: 0,
                 peaceMod: 0,
                 historicalNote: "This Russian victory represents a major alternate history. In reality, Russia experienced two revolutions in 1917: the February Revolution that overthrew the Tsar and established a Provisional Government, and the October Revolution (November in the Western calendar) that brought the Bolsheviks to power. Russia subsequently exited the war through the Treaty of Brest-Litovsk in March 1918, surrendering vast territories to Germany."
+            },
+
+            // JAPAN SCENARIOS - 1914-1919
+            japan_start: {
+                year: 1914,
+                title: "Japan - August 1914",
+                text: "You lead the Empire of Japan, allied with Britain but focused on expanding influence in Asia. The European war offers both risk and opportunity.",
+                options: [
+                    { text: "Honor the alliance and join the Allies", id: "japan_join_allies", peaceMod: -10 },
+                    { text: "Remain strictly neutral", id: "japan_neutrality", peaceMod: +15 },
+                    { text: "Use the distraction to pressure China", id: "japan_china_moves", peaceMod: -5 }
+                ],
+                objectiveEffects: {},
+                historicalNote: "Japan historically declared war on Germany in August 1914 and quickly occupied its Pacific colonies."
+            },
+
+            japan_join_allies: {
+                year: 1914,
+                title: "Japan Joins the Allies",
+                text: "You declare war on Germany and move to seize Qingdao and the Micronesian islands. Success boosts Japan's standing with the Western powers.",
+                options: [
+                    { text: "Consolidate gains and support Allied navies", id: "japan_naval_support", peaceMod: -5 },
+                    { text: "Issue the Twenty-One Demands to China", id: "japan_twenty_one", peaceMod: -10 }
+                ],
+                effects: { militaryStrength: 10, diplomacy: 5, stability: 5, resources: { manpower: 5, industry: 10, food: 5, munitions: 10, morale: 10 } },
+                objectiveEffects: {
+                    'Seize German colonial possessions': 'complete',
+                    'Increase international recognition as a great power': 'progress'
+                },
+                historicalNote: "Japan captured Qingdao in November 1914 and occupied German islands in the Pacific with little resistance."
+            },
+
+            japan_naval_support: {
+                year: 1917,
+                title: "Japanese Naval Assistance",
+                text: "At the Allies' request, you send destroyers to the Mediterranean to escort convoys. This cooperation earns Japan a voice at the peace table.",
+                options: [
+                    { text: "Seek recognition of territorial gains at Versailles", id: "japan_versailles", peaceMod: +10 }
+                ],
+                effects: { militaryStrength: -5, diplomacy: 15, stability: 5, resources: { manpower: -5, industry: 0, food: 0, munitions: -10, morale: 10 } },
+                objectiveEffects: {
+                    'Increase international recognition as a great power': 'complete'
+                },
+                historicalNote: "Japanese destroyers did operate in the Mediterranean from 1917, guarding Allied shipping." 
+            },
+
+            japan_versailles: {
+                year: 1919,
+                title: "Japan's Seat at Versailles",
+                text: "With the war won, Japan secures mandates over former German islands and a role in the new League of Nations, though Western powers reject calls for racial equality.",
+                endGame: true,
+                victory: true,
+                objectivesCompleted: 4,
+                objectivesFailed: 1,
+                peaceMod: 0,
+                historicalNote: "Japan left Versailles with expanded influence but lingering resentment over unequal treatment." 
+            },
+
+            japan_neutrality: {
+                year: 1914,
+                title: "Neutral Japan",
+                text: "You stay out of the European conflict, concentrating on industry and naval expansion while trading with all sides.",
+                options: [
+                    { text: "Enter the war later when prospects are clear", id: "japan_late_entry", peaceMod: -5 },
+                    { text: "Continue lucrative neutrality", id: "japan_neutral_end", peaceMod: +5 }
+                ],
+                effects: { militaryStrength: 5, diplomacy: -5, stability: 10, resources: { manpower: 5, industry: 15, food: 10, munitions: 10, morale: 5 } },
+                objectiveEffects: {
+                    'Expand influence in East Asia': 'progress'
+                },
+                historicalNote: "Neutrality would have increased Japan's economic growth but weakened ties with Britain." 
+            },
+
+            japan_late_entry: {
+                year: 1916,
+                title: "Late Entry",
+                text: "Seeing an opportunity for easy gains, you join the Allies in 1916 and occupy remaining German colonies, though with less diplomatic leverage than earlier.",
+                options: [
+                    { text: "Demand a voice at the peace conference", id: "japan_versailles", peaceMod: +5 }
+                ],
+                effects: { militaryStrength: 5, diplomacy: 5, stability: 5, resources: { manpower: 5, industry: 5, food: 0, munitions: 10, morale: 10 } },
+                objectiveEffects: {
+                    'Seize German colonial possessions': 'complete'
+                },
+                historicalNote: "A delayed entry would still allow Japan to seize territory but limit its influence over the postwar settlement." 
+            },
+
+            japan_neutral_end: {
+                year: 1918,
+                title: "Prosperity without Prestige",
+                text: "The war ends with Japan neutral. Economic growth has been strong, but the Allies exclude Japan from major decisions at Versailles.",
+                endGame: true,
+                victory: false,
+                objectivesCompleted: 2,
+                objectivesFailed: 3,
+                peaceMod: 0,
+                historicalNote: "Without wartime participation, Japan struggles to assert itself as a global power despite prosperity." 
+            },
+
+            japan_china_moves: {
+                year: 1915,
+                title: "Pressure on China",
+                text: "You stay formally neutral but present China with demands for special privileges. The Western powers view this with suspicion.",
+                options: [
+                    { text: "Press the demands aggressively", id: "japan_twenty_one", peaceMod: -10 },
+                    { text: "Keep the demands limited", id: "japan_neutral_end", peaceMod: +5 }
+                ],
+                effects: { militaryStrength: 0, diplomacy: -10, stability: 0, resources: { manpower: 0, industry: 5, food: 0, munitions: 0, morale: 0 } },
+                objectiveEffects: {
+                    'Secure economic concessions in China': 'progress'
+                },
+                historicalNote: "Japan issued the Twenty-One Demands to China in 1915, straining relations with Britain and the United States." 
+            },
+
+            japan_twenty_one: {
+                year: 1915,
+                title: "The Twenty-One Demands",
+                text: "Your aggressive demands spark protests from China and concern from the Western powers, but you extract significant concessions.",
+                options: [
+                    { text: "Cooperate with the Allies at sea", id: "japan_naval_support", peaceMod: -5 }
+                ],
+                effects: { militaryStrength: 5, diplomacy: -15, stability: -5, resources: { manpower: 0, industry: 0, food: 0, munitions: 5, morale: -5 } },
+                objectiveEffects: {
+                    'Secure economic concessions in China': 'complete',
+                    'Gain equal standing with Western powers': 'negative'
+                },
+                historicalNote: "The Twenty-One Demands deepened mistrust between Japan and the other Allied powers."
+            },
+
+            // USA - 1918 Spanish Flu Pandemic
+            usa_spanish_flu: {
+                year: 1918,
+                title: "The Spanish Flu Pandemic",
+                text: "As American troops return home, a deadly influenza sweeps across the globe, straining hospitals and complicating demobilization efforts.",
+                options: [
+                    { text: "Impose strict quarantine measures", id: "usa_flu_quarantine", peaceMod: +5 },
+                    { text: "Downplay the pandemic to speed demobilization", id: "usa_flu_downplay", peaceMod: -5 }
+                ],
+                effects: { militaryStrength: -5, diplomacy: 0, stability: -15, resources: { manpower: -5, industry: -10, food: -5, munitions: 0, morale: -15 } },
+                warProgress: 100,
+                objectiveEffects: {},
+                historicalNote: "The 1918 influenza pandemic killed an estimated 675,000 Americans and up to 50 million people worldwide."
+            },
+
+            usa_flu_quarantine: {
+                year: 1919,
+                title: "Quarantine and Recovery",
+                text: "Strict public health measures slow the spread but disrupt the economy. Public trust in government advice increases despite hardships.",
+                options: [
+                    { text: "Return to peacetime normalcy", id: "usa_demobilization", peaceMod: +5 }
+                ],
+                effects: { militaryStrength: 0, diplomacy: 10, stability: 5, resources: { manpower: 0, industry: -5, food: 0, munitions: 0, morale: 10 } },
+                objectiveEffects: {},
+                historicalNote: "Many U.S. cities enforced quarantines and mask ordinances with varying success."
+            },
+
+            usa_flu_downplay: {
+                year: 1919,
+                title: "Pandemic Runs Its Course",
+                text: "Authorities downplay the influenza threat to maintain morale, but the death toll soars as the virus spreads unchecked.",
+                options: [
+                    { text: "Return to peacetime normalcy", id: "usa_demobilization", peaceMod: +5 }
+                ],
+                effects: { militaryStrength: 0, diplomacy: -5, stability: -20, resources: { manpower: -10, industry: -10, food: -5, munitions: 0, morale: -20 } },
+                objectiveEffects: {},
+                historicalNote: "Some communities minimized the flu, leading to heavier casualties and public distrust."
+            },
+
+            usa_demobilization: {
+                year: 1920,
+                title: "Postwar America",
+                text: "Demobilization is complete and the nation turns inward. The United States enjoys short-term prosperity but retreats from European affairs.",
+                endGame: true,
+                victory: true,
+                objectivesCompleted: 4,
+                objectivesFailed: 1,
+                peaceMod: 0,
+                historicalNote: "After the war and pandemic, the U.S. entered a period of isolationism despite its newfound power."
+            },
+
+            // Germany - 1918 Revolution
+            germany_1918_revolution: {
+                year: 1918,
+                title: "Revolution at Home",
+                text: "Mutiny in the High Seas Fleet sparks uprisings across Germany. Workers' and soldiers' councils demand the Kaiser's abdication.",
+                options: [
+                    { text: "Abdicate and proclaim a republic", id: "germany_weimar", peaceMod: +15 },
+                    { text: "Attempt to crush the revolution", id: "germany_crush_revolt", peaceMod: -15 }
+                ],
+                effects: { militaryStrength: -20, diplomacy: -10, stability: -30, resources: { manpower: -10, industry: -15, food: -10, munitions: -5, morale: -25 } },
+                warProgress: 100,
+                objectiveEffects: {},
+                historicalNote: "The Kiel mutiny in October 1918 triggered a wave of uprisings that ended the German monarchy."
+            },
+
+            germany_weimar: {
+                year: 1919,
+                title: "Birth of the Weimar Republic",
+                text: "The Kaiser abdicates and a republican government signs the armistice. Germany must now accept harsh peace terms and political turmoil.",
+                endGame: true,
+                victory: false,
+                objectivesCompleted: 0,
+                objectivesFailed: 5,
+                peaceMod: 0,
+                historicalNote: "The Weimar Republic faced immediate challenges from extremists on both sides and the burden of the Versailles Treaty."
+            },
+
+            germany_crush_revolt: {
+                year: 1918,
+                title: "Failed Crackdown",
+                text: "Attempts to suppress the revolution lead to bloody street fighting. Loyal troops desert, forcing the government to sue for peace anyway.",
+                options: [
+                    { text: "Abdicate under pressure", id: "germany_weimar", peaceMod: +10 }
+                ],
+                effects: { militaryStrength: -30, diplomacy: -20, stability: -40, resources: { manpower: -15, industry: -20, food: -15, munitions: -10, morale: -30 } },
+                objectiveEffects: {},
+                historicalNote: "Government efforts to crush the November Revolution largely failed as more soldiers joined the uprising."
+            },
+
+            // Britain - Irish Rebellion Path
+            britain_irish_rising: {
+                year: 1916,
+                title: "Easter Rising in Ireland",
+                text: "Irish nationalists stage an armed uprising in Dublin while Britain is preoccupied with the war.",
+                options: [
+                    { text: "Crush the rebellion harshly", id: "britain_harsh_repression", peaceMod: -10 },
+                    { text: "Promise limited home rule", id: "britain_home_rule_promise", peaceMod: +10 }
+                ],
+                effects: { militaryStrength: -5, diplomacy: -5, stability: -15, resources: { manpower: 0, industry: 0, food: 0, munitions: 0, morale: -10 } },
+                warProgress: 40,
+                objectiveEffects: {},
+                historicalNote: "The Easter Rising of 1916 was suppressed within a week but galvanized support for Irish independence."
+            },
+
+            britain_harsh_repression: {
+                year: 1916,
+                title: "Repression and Resentment",
+                text: "Execution of rebel leaders fuels nationalist sentiment. Ireland becomes increasingly hostile to British rule.",
+                options: [
+                    { text: "Maintain strict control", id: "britain_irish_control", peaceMod: -5 },
+                    { text: "Offer concessions", id: "britain_home_rule_promise", peaceMod: +5 }
+                ],
+                effects: { militaryStrength: -5, diplomacy: -10, stability: -20, resources: { manpower: 0, industry: 0, food: 0, munitions: 0, morale: -15 } },
+                historicalNote: "Harsh reprisals after the Rising created martyrs and shifted public opinion toward independence."
+            },
+
+            britain_home_rule_promise: {
+                year: 1917,
+                title: "Promise of Home Rule",
+                text: "You pledge limited Irish self-government after the war, easing tensions for now but leaving difficult negotiations ahead.",
+                options: [
+                    { text: "Enact home rule legislation", id: "britain_home_rule_act", peaceMod: +10 },
+                    { text: "Delay implementation", id: "britain_irish_control", peaceMod: -5 }
+                ],
+                effects: { militaryStrength: 0, diplomacy: 10, stability: 10, resources: { manpower: 0, industry: 0, food: 0, munitions: 0, morale: 5 } },
+                historicalNote: "Home rule was repeatedly postponed during the war, contributing to later unrest."
+            },
+
+            britain_home_rule_act: {
+                year: 1918,
+                title: "Irish Home Rule Implemented",
+                text: "Home rule takes effect as the war nears its end, reducing tensions and freeing troops for the final offensives.",
+                options: [
+                    { text: "Push on with the Hundred Days Offensive", id: "britain_hundred_days", peaceMod: -5 }
+                ],
+                effects: { militaryStrength: 5, diplomacy: 15, stability: 20, resources: { manpower: 5, industry: 0, food: 0, munitions: 0, morale: 15 } },
+                historicalNote: "Early implementation of home rule might have averted the later War of Independence."
+            },
+
+            britain_irish_control: {
+                year: 1917,
+                title: "Continued Military Control",
+                text: "British forces keep Ireland under martial law, diverting resources from the war and fueling resentment among the population.",
+                options: [
+                    { text: "Reassess and offer concessions", id: "britain_home_rule_promise", peaceMod: +5 },
+                    { text: "Maintain hard line", id: "britain_hardline_ireland", peaceMod: -5 }
+                ],
+                effects: { militaryStrength: -5, diplomacy: -10, stability: -25, resources: { manpower: -5, industry: 0, food: 0, munitions: 0, morale: -20 } },
+                historicalNote: "Extended martial law increased hostility toward British rule, setting the stage for guerrilla conflict after the war."
+            },
+
+            britain_hardline_ireland: {
+                year: 1918,
+                title: "Mounting Irish Resistance",
+                text: "Suppression breeds radical nationalism. After the war, full-scale insurgency erupts across Ireland.",
+                endGame: true,
+                victory: false,
+                objectivesCompleted: 2,
+                objectivesFailed: 3,
+                peaceMod: 0,
+                historicalNote: "The harsh British response to Irish nationalism contributed to the War of Independence beginning in 1919."
             }
         };
 
